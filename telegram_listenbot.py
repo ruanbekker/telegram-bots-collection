@@ -13,14 +13,17 @@ import os
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+words = ['sustainable', 'super']
 chat_id_of_channel = os.environ['TELEGRAM_GROUPID']
 TOKEN = os.environ['TELEGRAM_TOKEN']
 
 start_message = """
 Welcome :-D
 
-/start -> Shows this message
-/help  -> Shows something else
+/start   ->   Shows this message
+/help    ->   Shows something else
+filters  ->   When any of the words defined in the words list are entered,
+              user will be notified that the words are not allowed.
 """
 
 def tokenizer(input_string):
@@ -44,6 +47,11 @@ def channel_message(bot, update):
 def reply_msg(bot, update):
     chat_id = update.message.chat_id
     text = update.message.text
+    tokenized = tokenizer(text)
+    for each_word in tokenized:
+        if each_word in words:
+            bot.send_message(chat_id=chat_id, text="Yo {}! {} is not accepted here".format(update.message.chat.first_name, each_word))
+    
     print({"date": str(update.message.date), "message_id": update.message.message_id, "chat_id": str(chat_id), "username": update.message.chat.username, "firstname": update.message.chat.first_name, "text": update.message.text})
     
 def main():
