@@ -23,6 +23,10 @@ Welcome :-D
 /help  -> Shows something else
 """
 
+def tokenizer(input_string):
+    response = re.sub('[^A-Za-z0-9]+', ' ', input_string).split()
+    return response
+
 def start(bot, update):
     chat_id = update.message.chat_id
     bot.send_message(chat_id=chat_id, text=start_message)
