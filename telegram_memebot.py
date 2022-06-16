@@ -14,22 +14,22 @@ Commands available:
 /meme     ->    Fetches a random meme
 """
 
-def start(bot, update):
+def start(update, context):
     chat_id = update.message.chat_id
     print(chat_id)
-    bot.send_message(chat_id=chat_id, text=start_message)
+    context.bot.send_message(chat_id=chat_id, text=start_message)
 
 def get_meme_url():
     urls = requests.get('https://api.imgflip.com/get_memes').json()
     meme_url = urls['data']['memes'][random.randint(1,100)]
     return meme_url
 
-def meme(bot, update):
+def meme(update, context):
     url = get_meme_url()
     chat_id = update.message.chat_id
     print(chat_id)
-    bot.send_message(chat_id=chat_id, text=url['name'])
-    bot.send_photo(chat_id=chat_id, photo=url['url'])
+    context.bot.send_message(chat_id=chat_id, text=url['name'])
+    context.bot.send_photo(chat_id=chat_id, photo=url['url'])
 
 def main():
     updater = Updater(os.environ['TELEGRAM_TOKEN'])
