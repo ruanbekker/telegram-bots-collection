@@ -22,5 +22,8 @@ With a list of commands:
 
 Head to the BotFather and run `/setcommands`
 
+<img width="501" alt="image" src="https://user-images.githubusercontent.com/567298/174078929-6d5bea1e-56a0-4c42-9d53-f96264e2f587.png">
+
+
 Source:
 - https://stackoverflow.com/a/34458436
