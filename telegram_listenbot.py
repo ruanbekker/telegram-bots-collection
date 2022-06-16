@@ -30,27 +30,27 @@ def tokenizer(input_string):
     response = re.sub('[^A-Za-z0-9]+', ' ', input_string).split()
     return response
 
-def start(bot, update):
+def start(update, context):
     chat_id = update.message.chat_id
-    bot.send_message(chat_id=chat_id, text=start_message)
+    context.bot.send_message(chat_id=chat_id, text=start_message)
 
-def help(bot, update):
+def help(update, context):
     url = 'https://sayingimages.com/wp-content/uploads/welcome-to-the-danger-zone-meme.jpg'
     chat_id = update.message.chat_id
-    bot.send_photo(chat_id=chat_id, photo=url)
-    bot.send_message(chat_id=chat_id, text=start_message)
+    context.bot.send_photo(chat_id=chat_id, photo=url)
+    context.bot.send_message(chat_id=chat_id, text=start_message)
 
 def channel_message(bot, update):
     msg = update.effective_message
     print("Message received from channel: %s" % str(msg['text']))
 
-def reply_msg(bot, update):
+def reply_msg(update, context):
     chat_id = update.message.chat_id
     text = update.message.text
     tokenized = tokenizer(text)
     for each_word in tokenized:
         if each_word in words:
-            bot.send_message(chat_id=chat_id, text="Yo {}! {} is not accepted here".format(update.message.chat.first_name, each_word))
+            context.bot.send_message(chat_id=chat_id, text="Yo {}! {} is not accepted here".format(update.message.chat.first_name, each_word))
     
     print({"date": str(update.message.date), "message_id": update.message.message_id, "chat_id": str(chat_id), "username": update.message.chat.username, "firstname": update.message.chat.first_name, "text": update.message.text})
     
