@@ -68,3 +68,32 @@ $ curl -s -XPOST -H 'Content-Type: application/json' https://api.telegram.org/bo
   }
 }
 ```
+
+To edit the message we can use the [editMessageText](https://core.telegram.org/bots/api#editmessagetext) method:
+
+```bash
+$ curl -s -XPOST -H 'Content-Type: application/json' https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/editMessageText \
+  -d '{"chat_id": "14xxxxxxxxxx", "message_id": 496, "text": "This is a edited test from curl", "disable_notification": false}' | jq .
+{
+  "ok": true,
+  "result": {
+    "message_id": 496,
+    "from": {
+      "id": 6xxxxxxxxxx,
+      "is_bot": true,
+      "first_name": "xxxxxxxxxx",
+      "username": "6xxxxxxxxxx_bot"
+    },
+    "chat": {
+      "id": 14xxxxxxxxxx,
+      "first_name": "Ruan",
+      "last_name": "xxxxx",
+      "username": "xxxxxxxxxxxxxx",
+      "type": "private"
+    },
+    "date": 1655380321,
+    "edit_date": 1655380614,
+    "text": "This is a edited test from curl"
+  }
+}
+```
